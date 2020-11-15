@@ -160,6 +160,7 @@ RadioSVGMap.propTypes = {
 	onLocationMouseMove: PropTypes.func,
 	onLocationFocus: PropTypes.func,
 	onLocationBlur: PropTypes.func,
+	selected: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default RadioSVGMap;

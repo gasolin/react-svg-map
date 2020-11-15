@@ -22,7 +22,11 @@ class CheckboxSVGMap extends React.Component {
 	 * @returns {boolean} True if the location is selected
 	 */
 	isLocationSelected(location) {
-		return this.state.selectedLocations.findIndex(selectedLocation => selectedLocation.id === location.id) > -1;
+		const result = (this.props.selected && this.props.selected.findIndex(selectedLocation => selectedLocation === location.id) > -1)
+		|| this.state.selectedLocations.findIndex(selectedLocation => selectedLocation.id === location.id) > -1;
+		// eslint-disable-next-line
+		console.log('location ', (this.props.selected && this.props.selected.findIndex(selectedLocation => selectedLocation === location.id) > -1), this.state.selectedLocations.findIndex(selectedLocation => selectedLocation.id === location.id) > -1)
+		return result;
 	}
 
 	/**
@@ -32,6 +36,8 @@ class CheckboxSVGMap extends React.Component {
 	 */
 	toggleLocation(event) {
 		const location = event.target;
+		// eslint-disable-next-line
+		console.log('click ', location.id)
 
 		this.setState(prevState => {
 			// Copy old state
@@ -95,6 +101,7 @@ class CheckboxSVGMap extends React.Component {
 				onLocationMouseMove={this.props.onLocationMouseMove}
 				onLocationFocus={this.props.onLocationFocus}
 				onLocationBlur={this.props.onLocationBlur}
+				selected={this.props.selected}
 			/>
 		);
 	}
@@ -122,6 +129,7 @@ CheckboxSVGMap.propTypes = {
 	onLocationMouseMove: PropTypes.func,
 	onLocationFocus: PropTypes.func,
 	onLocationBlur: PropTypes.func,
+	selected: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default CheckboxSVGMap;
